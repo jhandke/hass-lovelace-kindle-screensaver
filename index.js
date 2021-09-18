@@ -28,7 +28,7 @@ const gm = require("gm");
       `--lang=${config.language}`,
       config.ignoreCertificateErrors && "--ignore-certificate-errors",
     ].filter((x) => x),
-    headless: config.debug !== true,
+    headless: config.debug !== true
   });
 
   console.log("Adding authentication entry to browser's local storage...");
@@ -149,6 +149,7 @@ async function renderUrlToImageAsync(browser, pageConfig, url, path) {
     }
 
     await page.setViewport(size);
+    await page.emulateTimezone('Europe/Berlin');
     await page.goto(url, {
       waitUntil: ["domcontentloaded", "load", "networkidle0"],
       timeout: config.renderingTimeout,
